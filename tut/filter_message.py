@@ -1,4 +1,7 @@
-# Trying to make a simple program to filter out words from messages.
+# Trying to make a simple program to filter out words from messages.ArithmeticError
+
+import string
+
 messages = [
     "You swing wide and miss.",
     "The enemy laughs at you.",
@@ -70,25 +73,27 @@ messages = [
 def filter_messages(messages):
     damn_counter = 0
     filtered_messages = []  # Empty List
-
     # We need to check each messages
     for message in messages:
         filtered_word = []
         current_message = message
         print(f"Current Message: {current_message}")
-
-        # Now we're splitting the words
+        # Now we're splitting the individual lists into words
         for word in message.split():
             print(f"Word: {word}")
-            if word == "Dang":
+            normalized = word.strip(string.punctuation).lower()
+
+            if normalized == "damn":
                 damn_counter += 1
+            else:
                 filtered_word.append(word)
-
+        print(filtered_word)
         filtered_messages.append(" ".join(filtered_word))
-        print(f"Damn Counter: {damn_counter}")
-
     for message in filtered_messages:
+        print("\n")
         print(message)
+    return filtered_messages, damn_counter
 
 
-filter_messages(messages)
+filtered_msg_final, counter = filter_messages(messages)
+print(f"\nDamn Counter: {counter}")
